@@ -24,32 +24,41 @@ public class ServerGUI {
     private static void createAndShowGUI(){
         //Create and set up the window
         JFrame frame = new JFrame("ServerGUI");
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //frame.setSize(new Dimension(1000, 500));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.setResizable(false);
 
         //create main panel
-        JPanel panel = new JPanel(new BorderLayout());
-        frame.add(panel);
-        JPanel p2 = new JPanel(new GridLayout(3,1));
-        panel.add(p2, BorderLayout.WEST);
-        JLabel l = new JLabel("test");
-        l.setPreferredSize(new Dimension(200, 200));
-        JLabel l2 = new JLabel("test");
-        l2.setPreferredSize(new Dimension(200, 200));
-        p2.add(l);
-        panel.add(l2, BorderLayout.EAST);
+        JPanel rootPanel = new JPanel(new BorderLayout());
+        rootPanel.setSize(new Dimension(1000,500));
+        frame.add(rootPanel);
+        JPanel westGridPanel = new JPanel(new GridLayout(3,1));
+        westGridPanel.setPreferredSize(new Dimension(100, 400));
+        rootPanel.add(westGridPanel, BorderLayout.WEST);
+        JLabel campaignsLabel = new JLabel("Campaigns");
+        campaignsLabel.setPreferredSize(new Dimension(50, 50));
+        westGridPanel.add(campaignsLabel);
+
+        JButton newCampaign = new JButton("New Campaign");
+        //newCampaign.setSize(new Dimension(50,50));
+        //newCampaign.setSize(50,50);
+        newCampaign.setPreferredSize(new Dimension(50,50));
+        westGridPanel.add(newCampaign);
+
+        JList<Campaign> campaignList = new JList<Campaign>();
+        campaignList.setPreferredSize(new Dimension(100, 200));
+        Campaign[] campaigns1 = new Campaign[5];
+        campaigns1[0] = new Campaign("Test1");
+        campaignList.setListData(campaigns1);
+        westGridPanel.add(campaignList);
+
+
+        JLabel l2 = new JLabel("label2");
+        l2.setPreferredSize(new Dimension(100, 50));
+        rootPanel.add(l2, BorderLayout.EAST);
 
         /*
-        //create west panel
-        LayoutManager westGridLayout = new GridLayout(3,1);
-        JPanel westPanel = new JPanel(westGridLayout);
-        JLabel campaignsLabel = new JLabel("Campaigns");
-        campaignsLabel.setPreferredSize(new Dimension(200, 200));
-        JButton newCampaignButton = new JButton("New Campaign");
-        //JList<Campaign> campaignList = new JList<Campaign>();
-        westGridLayout.addLayoutComponent("campaignsLabel", campaignsLabel);
-        westGridLayout.addLayoutComponent("newCampaignButton", newCampaignButton);
-        //westGridLayout.addLayoutComponent("campaignList", campaignList);
-
         //create east panel
         LayoutManager eastGridLayout = new GridLayout(4,1);
         JPanel eastPanel = new JPanel(westGridLayout);

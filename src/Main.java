@@ -26,20 +26,17 @@ public class Main {
 
         //Start a logger
         try {
-            serverLogger = new FileWriter(new File(System.getProperty("user.dir" + "\\serverFiles\\Logs" + "\\" +  LocalDateTime.now())));
+            LocalDateTime date = LocalDateTime.now();
+            String fileName = System.getProperty("user.dir")
+                    + "\\serverFiles\\Logs" + "\\" + date.getYear() + "-" +
+                    date.getMonthValue() + "-" + date.getDayOfMonth() + "." +
+                    date.getHour() + "." + date.getMinute() + "." + date.getSecond();
+            System.out.println("LoggerFileName: " + fileName);
+            serverLogger = new FileWriter(fileName);
         } catch (IOException e) {
-            System.err.println("ServerMain: Failed to initilize the logger");
+            System.err.println("ServerMain: Failed to initialize the logger");
             System.exit(1);
         }
-        /*
-        finally {
-            try {
-                serverLogger.close();
-            } catch (IOException e) {
-                System.err.println("ServerMain: Failed to close serverLogger");
-            }
-        }
-        */
         try {
             serverLogger.write("ServerLoggerStarted\n");
         } catch (IOException e) {
@@ -48,12 +45,22 @@ public class Main {
 
         if(args.length != 0){
             //run server
+            try {
+                serverLogger.write("Starting Server\n");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             try{
                 port = Integer.parseInt(args[0]);
             }
             catch (NumberFormatException nonInt){
                 System.out.println("ServerMain: main <port> must be an integer");
                 System.exit(1);
+            }
+            try {
+                serverLogger.write("Server Started listening on port: " + port + "\n");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
             ServerLoader serverLoader = new ServerLoader(new Campaign("test"));
             closeServerLogger();

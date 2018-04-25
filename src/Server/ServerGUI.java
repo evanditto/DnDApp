@@ -24,56 +24,70 @@ public class ServerGUI {
     private static void createAndShowGUI(){
         //Create and set up the window
         JFrame frame = new JFrame("ServerGUI");
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        //frame.setSize(new Dimension(1000, 500));
+        //frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setSize(1000,600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //frame.setResizable(false);
 
         //create main panel
         JPanel rootPanel = new JPanel(new BorderLayout());
-        rootPanel.setSize(new Dimension(1000,500));
+        rootPanel.setSize(800,800);
         frame.add(rootPanel);
-        JPanel westGridPanel = new JPanel(new GridLayout(3,1));
-        westGridPanel.setPreferredSize(new Dimension(100, 400));
-        rootPanel.add(westGridPanel, BorderLayout.WEST);
+
+        //Create north Panel
+        JPanel northPanel = new JPanel();
+        JLabel serverGUILabel = new JLabel("ServerGui: v.1");
+        LayoutManager northFlowLayout = new FlowLayout(FlowLayout.CENTER);
+        northPanel.setLayout(northFlowLayout);
+        northPanel.setBackground(new Color(255,255,0));
+        northPanel.add(serverGUILabel);
+        rootPanel.add(northPanel, BorderLayout.NORTH);
+
+        //Create South Panel
+        JPanel southPanel = new JPanel();
+        JLabel southLabel = new JLabel("South");
+        LayoutManager southFlowLayout = new FlowLayout();
+        southPanel.setLayout(southFlowLayout);
+        southPanel.setBackground(new Color(255,0,255));
+        southPanel.add(southLabel);
+        rootPanel.add(southPanel, BorderLayout.SOUTH);
+
+        //Create East Panel
+        JPanel eastPanel = new JPanel();
+        JLabel eastLabel = new JLabel("East");
+        LayoutManager eastFlowLayout = new FlowLayout();
+        eastPanel.setLayout(eastFlowLayout);
+        eastPanel.setBackground(new Color(0, 255,255));
+        eastPanel.add(eastLabel);
+        rootPanel.add(eastPanel, BorderLayout.EAST);
+
+        //Create West Panel
+        JPanel westPanel = new JPanel();
         JLabel campaignsLabel = new JLabel("Campaigns");
-        campaignsLabel.setPreferredSize(new Dimension(50, 50));
-        westGridPanel.add(campaignsLabel);
-
-        JButton newCampaign = new JButton("New Campaign");
-        //newCampaign.setSize(new Dimension(50,50));
-        //newCampaign.setSize(50,50);
-        newCampaign.setPreferredSize(new Dimension(50,50));
-        westGridPanel.add(newCampaign);
-
+        JButton newCampaignButton = new JButton("New Campaign");
         JList<Campaign> campaignList = new JList<Campaign>();
-        campaignList.setPreferredSize(new Dimension(100, 200));
-        Campaign[] campaigns1 = new Campaign[5];
+        Campaign[] campaigns1 = new Campaign[1];
         campaigns1[0] = new Campaign("Test1");
         campaignList.setListData(campaigns1);
-        westGridPanel.add(campaignList);
+        LayoutManager westBorderLayout = new BorderLayout();
+        westPanel.setLayout(westBorderLayout);
+        westPanel.setBackground(new Color(255,0,0));
+        westPanel.add(campaignsLabel, BorderLayout.NORTH);
+        westPanel.add(campaignList, BorderLayout.CENTER);
+        westPanel.add(newCampaignButton, BorderLayout.SOUTH);
+        rootPanel.add(westPanel, BorderLayout.WEST);
 
-
-        JLabel l2 = new JLabel("label2");
-        l2.setPreferredSize(new Dimension(100, 50));
-        rootPanel.add(l2, BorderLayout.EAST);
-
-        /*
-        //create east panel
-        LayoutManager eastGridLayout = new GridLayout(4,1);
-        JPanel eastPanel = new JPanel(westGridLayout);
-
-        //create center panel
-        JPanel centerPanel = new JPanel(westGridLayout);
-
-
-        panel.add(westPanel, BorderLayout.WEST);
-        panel.add(eastPanel, BorderLayout.EAST);
-        panel.add(centerPanel, BorderLayout.CENTER);
-*/
+        //Create Center Panel
+        JPanel centerPanel = new JPanel();
+        JLabel centerLabel = new JLabel("center");
+        LayoutManager centerFlowLayout = new FlowLayout(FlowLayout.CENTER);
+        centerPanel.setLayout(centerFlowLayout);
+        centerPanel.setBackground(new Color(0,0,255));
+        centerPanel.add(centerLabel);
+        rootPanel.add(centerPanel, BorderLayout.CENTER);
 
         //Display the window.
-        frame.pack();
+        //frame.pack();
         frame.setVisible(true);
     }
 }

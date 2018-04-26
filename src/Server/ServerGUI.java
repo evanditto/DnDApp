@@ -67,7 +67,7 @@ public class ServerGUI {
         JButton newCampaignButton = new JButton("New Campaign");
         JList<Campaign> campaignList = new JList<Campaign>();
         Campaign[] campaigns1 = new Campaign[1];
-        campaigns1[0] = new Campaign("Test1");
+        campaigns1[0] = new Campaign("Test1", 1);
         campaignList.setListData(campaigns1);
         LayoutManager westBorderLayout = new BorderLayout();
         westPanel.setLayout(westBorderLayout);

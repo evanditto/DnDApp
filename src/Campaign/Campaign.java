@@ -2,14 +2,17 @@ package Campaign;
 
 public class Campaign {
 
-    String text;
+    public String name;
+    private int numPlayers;
+    private Character[] characters;
 
-    public Campaign(String text){
-        this.text = text;
+    public Campaign(String name, int numPlayers) {
+        this.name = name;
+        this.numPlayers = numPlayers;
+        characters = new Character[numPlayers];
     }
 
-    public String toString(){
-        return text;
+    public String toString() {
+        return name;
     }
-
 }

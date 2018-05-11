@@ -2,9 +2,12 @@ import Campaign.Campaign;
 //import Server.ServerGUI;
 import Server.ServerLoader;
 
+import javax.xml.crypto.Data;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.DatagramSocket;
+import java.net.SocketException;
 import java.time.LocalDateTime;
 
 /**
@@ -57,11 +60,22 @@ public class Main {
                 System.out.println("ServerMain: main <port> must be an integer");
                 System.exit(1);
             }
+            DatagramSocket mailBox = null;
+            try {
+                mailBox = new DatagramSocket(port);
+            } catch (SocketException e) {
+                System.err.println("ServerMain: Failed to open datagram socket on port " + port);
+                System.exit(1);
+            }
             try {
                 serverLogger.write("Server Started listening on port: " + port + "\n");
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            //Listen for client connections and create tcp connections on port sent to client
+
+
             ServerLoader serverLoader = new ServerLoader(new Campaign("test"));
             closeServerLogger();
             //ServerGUI gui = new ServerGUI();

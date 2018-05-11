@@ -1,0 +1,2 @@
+Weapon
+    int type 1 = physical 2 = fire 3 = water = air 5 = magic
